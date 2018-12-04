@@ -1,8 +1,9 @@
 import jieba
 #切換繁體詞庫
-jieba.set_dictionary('D:/Anaconda3/envs/py3.6/Lib/site-packages/jieba/dict1.txt')
+#jieba.set_dictionary('D:/Anaconda3/envs/py3.6/Lib/site-packages/jieba/dict1.txt')
+jieba.set_dictionary('C:/Users/ASUS/Desktop/python/dict1.txt')
 #jieba.add_word('增加') 手動增加詞庫
-cutin='C:/Users/ASUS/Desktop/python/voice.txt'
+cutin='C:/Users/ASUS/Desktop/python/voice.txt'#放進去段詞的文章
 outtxt='C:/Users/ASUS/Desktop/python/斷詞輸出/斷詞輸出.txt'
 
 f=open(cutin,'r')
