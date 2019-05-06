@@ -7,26 +7,7 @@ import os
 #播放語音檔與轉換成文字
 def Voicemp3(printmp3):
     print("轉換語音檔為文字")
-    CHUNK=1024
-    #開啟檔案
-    file=wave.open(printmp3,"rb")
-    p=pyaudio.PyAudio()
-    #開啟串流 open stream
-    stream = p.open(format = p.get_format_from_width(file.getsampwidth()),
-                    channels=file.getnchannels(),
-                    rate=file.getframerate(),
-                    output=True)
-    data=file.readframes(CHUNK)
-
-    while data:
-        stream.write(data)
-        data=file.readframes(CHUNK)
-
-    stream.stop_stream()
-    stream.close()
-
-    p.terminate()
-    
+    #listen_recording(printmp3)
     e =speech_recognition.Recognizer()
     with speech_recognition.AudioFile(printmp3) as source:
         e.adjust_for_ambient_noise(source,duration=0)
@@ -51,6 +32,28 @@ def speakchinese():
             txt="口語清楚點"
         return txt
 
+#聆聽錄音檔
+def listen_recording(printmp3):
+    CHUNK=1024
+    #開啟檔案
+    file=wave.open(printmp3,"rb")
+    p=pyaudio.PyAudio()
+    #開啟串流 open stream
+    stream = p.open(format = p.get_format_from_width(file.getsampwidth()),
+                    channels=file.getnchannels(),
+                    rate=file.getframerate(),
+                    output=True)
+    data=file.readframes(CHUNK)
+
+    while data:
+        stream.write(data)
+        data=file.readframes(CHUNK)
+
+    stream.stop_stream()
+    stream.close()
+
+    p.terminate()
+    
 def readfile():
     filepath = "./ReadFile/" #存放音檔的路徑
     filename= os.listdir(filepath) #資料夾下的所有檔案 
@@ -76,14 +79,15 @@ def init():
     print (TEXT)
     f1.write(TEXT+'\n')
     print('\n\n檔案'+outtxt+"已存檔")
-
 # =============================================================================
+#     outtxt = "./speaktxt/"+speakname+".txt"
+#     f1=open(outtxt,'w',encoding='CP950')
 #     TEXT=speakchinese()
 #     print (TEXT)
 #     f1.write(TEXT+'\n')
 #     print('\n\n檔案'+outtxt+"已存檔")
+#     f1.close()
 # =============================================================================
-    f1.close()
 
 if __name__ == '__main__':
     init()
