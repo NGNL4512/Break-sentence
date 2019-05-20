@@ -11,6 +11,7 @@ def Voicemp3(printmp3):
     e =speech_recognition.Recognizer()
     with speech_recognition.AudioFile(printmp3) as source:
         e.adjust_for_ambient_noise(source,duration=0)
+        #audio=e.record(source,offset=9.776,duration=3)
         audio=e.record(source)
     txt=e.recognize_google(audio,language='zh-TW')
     return txt
