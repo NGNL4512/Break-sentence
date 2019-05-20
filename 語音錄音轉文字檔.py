@@ -73,7 +73,7 @@ def init():
     #儲存路徑
     filename=readfile()
     outtxt = "./speaktxt/"+speakname+".txt" #錄音檔轉成的文字檔(名稱跟錄音檔相同)
-    f1=open(outtxt,'w',encoding='CP950')
+    f1=open(outtxt,'w',encoding='UTF-8')
     #開語音檔
     print("播放語音")
     TEXT=Voicemp3(filename)

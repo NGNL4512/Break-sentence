@@ -11,7 +11,7 @@ def cutword(filename):
     cutin=filename #放進去斷詞的文章
     outtxt='./斷詞輸出/斷詞輸出.txt'
 
-    f=open(cutin,'r',encoding='CP950')
+    f=open(cutin,'r',encoding='UTF-8')
     out=open(outtxt,'w',encoding='UTF-8')
 
     w=f.read()
@@ -19,7 +19,7 @@ def cutword(filename):
     seg_list = jieba.cut(w)  #精準模式
     cuttext="/".join(seg_list)
     out.write(cuttext)
-    #print(cuttext)
+    print(cuttext)
     f.close()
     out.close()
 
