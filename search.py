@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 jieba.set_dictionary('dict1.txt')
 #jieba.add_word('增加') 手動增加詞庫
 
-#文章斷詞
+'''
+文章斷詞
+'''
 def cutword(filename):
     cutin=filename #放進去斷詞的文章
     outtxt='./斷詞輸出/斷詞輸出.txt'
@@ -19,10 +21,12 @@ def cutword(filename):
     seg_list = jieba.cut(w)  #精準模式
     cuttext="/".join(seg_list)
     out.write(cuttext)
-    print(cuttext)
+    #print(cuttext)
     f.close()
     out.close()
-
+'''
+跟詞庫比較，並返回加總分數
+'''
 def searchkey(filesimilar):
     outtxt='./斷詞輸出/斷詞輸出.txt'
     #outtxt=filename
@@ -87,8 +91,10 @@ def searchkey(filesimilar):
                 if keyword[i][j] in setcut:
                     sum+=int(keyword[i][0])*cutarray.count(keyword[i][j])
                     allkey.append(keyword[i][j])
-    if allkey==[]:
-        print("沒有關鍵字")
+# =============================================================================
+#     if allkey==[]:
+#         print("沒有關鍵字")
+# =============================================================================
 # =============================================================================
 #     else:
 #         allkey.sort()
@@ -99,9 +105,11 @@ def searchkey(filesimilar):
 #             print (item,":",cutarray.count(item),"次")
 #         print("總共",sum,"分")
 # =============================================================================
-    return sum
     fl.close()
-    
+    return sum
+'''
+
+'''
 def readfile():
     filepath = "./speaktxt/" #存放文字檔的路徑
     filename= os.listdir(filepath) #資料夾下的所有檔案 
@@ -118,12 +126,13 @@ def similar_score():
     filename= os.listdir(filepath) #資料夾下的所有檔案 
     allsimilar=[]
     for file in range(len(filename)):
+        #print(filepath+filename[file])
         score=searchkey(filepath+filename[file])
         allsimilar.append(score)
     #for i in range(0,score.__len__(),1):
     return allsimilar
-def bar_graph(score):
-    similarname = ['scared', 'sad', 'anxiety', 'angry', 'surprised']
+def bar_graph(score): #害怕，悲傷，憂鬱，焦慮，生氣
+    similarname = ['scared', 'sad', 'melancholy', 'anxiety', 'angry']
     #X軸名稱，Y軸分數
     plt.bar(similarname, score, label = '情緒')
     for a,b in zip(similarname,score):  
@@ -137,5 +146,6 @@ def init():
     cutword(filename)
     score=similar_score()
     bar_graph(score)
+
 if __name__ == '__main__':
     init()
